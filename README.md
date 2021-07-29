@@ -1,0 +1,2 @@
+# LilliCad_Sample
+LilliCadのファイル読み込み方法についてのサンプルファイルです。
