@@ -7,6 +7,11 @@ namespace LilliCad_Sample {
 
         public string Read(StreamReader sr) {
             var sb = new StringBuilder();
+            var line = sr.ReadLine();
+            if(line != "$$LilliCadText$$") throw new FileFormatException("Not LilliCad format");
+            int version = ConvertInt(ReadTokens(sr), 0);
+            sb.AppendLine($"lcd file version {version}");
+
             string sec = "";
             while (!sr.EndOfStream) {
                 int c = sr.Peek();
@@ -18,15 +23,37 @@ namespace LilliCad_Sample {
                 }
                 switch (sec) {
                     case "PAPER": {
-//                            ParsePaperInfo(sr, sb);
+                            var paperName = ReadSingleString(sr);
+                            var paperInfo = ReadSingleString(sr);
+                            string[] tokens;
+                            tokens = ReadTokens(sr);
+                            var w = ConvertDouble(tokens, 0);
+                            var h = ConvertDouble(tokens, 1);
+                            var scaleName = ReadSingleString(sr);
+                            tokens = ReadTokens(sr);
+                            var scale = ConvertDouble(tokens, 0);
+                            tokens = ReadTokens(sr);
+                            int horz = ConvertInt(tokens, 0);
+                            int basis = ConvertInt(tokens, 1);
+                            sb.AppendLine($"Paper {paperName} {paperInfo}");
+                            sb.AppendLine($"\tWidth:{w} Height:{h}");
+                            sb.AppendLine($"\tScaleName {scaleName}  scale{scale}");
                         }
                         break;
                     case "ORIGIN": {
-//                            ParseOrigin(sr, sb);
+                            string[] tokens;
+                            tokens = ReadTokens(sr);
+                            var x = ConvertDouble(tokens, 0);
+                            var y = ConvertDouble(tokens, 1);
+                            sb.AppendLine($"Grid origin ({x}, {y})");
                         }
                         break;
                     case "GRID": {
-//                            ParseGrid(sr, sb);
+                            string[] tokens;
+                            tokens = ReadTokens(sr);
+                            var x = ConvertDouble(tokens, 0);
+                            var y = ConvertDouble(tokens, 1);
+                            sb.AppendLine($"Grid size ({x}, {y})");
                         }
                         break;
                     case "TOOL": {
