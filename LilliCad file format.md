@@ -609,7 +609,7 @@ Y1-Yn:FLOAT	頂点Y（N個）
 ##### パラメータ
 
 ```
-LC LS LW AT1 AS1 AT2 AS2
+LC LS LW AT1 AS1 AT2 AS2 FC
 N
 X1 Y1
 X2 Y2
