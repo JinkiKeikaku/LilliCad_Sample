@@ -722,7 +722,7 @@ H:FLOAT　テキストの表示領域高さ
 
 FH：FLOAT　フォントサイズ
 
-FW：FLOAT　フォント幅
+FW：FLOAT　フォント幅。0の場合は未使用。
 
 A：FLOAT	角度
 
@@ -783,7 +783,7 @@ H:FLOAT　テキストの表示領域高さ
 
 FH：FLOAT　フォントサイズ
 
-FW：FLOAT　フォント幅
+FW：FLOAT　フォント幅。0の場合は未使用。
 
 A：FLOAT	角度
 
